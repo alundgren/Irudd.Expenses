@@ -9,6 +9,10 @@
 Run with:
 > dotnet run
 
+Note:
+- You need sql server installed and exposed as localhost. Running the app will automatically create the database AAA_ExpensesDb.
+- To use a different test database change the ExpensesDb connection string in appsettings.Development.json.
+
 ## Basic usage
 
 For exact api details see the swagger documenation at:
