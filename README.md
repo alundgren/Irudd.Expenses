@@ -4,7 +4,7 @@
 - A basic expense tracker using a sql server datastore + exposing a dotnet core api.
 - Authentication is handled using [ASP.NET Core Identity](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-8.0)
 
-## Run the app (Irudd.Expenses.Api)
+## Run the app (api/Irudd.Expenses.Api)
 
 Run with:
 > dotnet run
@@ -31,7 +31,7 @@ Add expenses:
 Get a list of the latest expenses:
 > GET v1/expenses/latest
 
-## Run the tests (Irudd.Expenses.Api.Test)
+## Run the tests (api/Irudd.Expenses.Api.Test)
 
 The tests uses the InMemory ef provider instead of sql server.
 
