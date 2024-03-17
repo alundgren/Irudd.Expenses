@@ -18,6 +18,8 @@ Note:
 For exact api details see the swagger documenation at:
 https://localhost:7241/swagger/index.html
 
+The directory bruno-collection has a postman-like collection of request templates for use with [Bruno](https://www.usebruno.com/).
+
 ### Example workflow
 
 Register a user:

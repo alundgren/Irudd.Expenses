@@ -1,0 +1,20 @@
+meta {
+  name: latest-expenses
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{host}}/v1/expenses/latest?skip=0&take=50
+  body: none
+  auth: bearer
+}
+
+query {
+  skip: 0
+  take: 50
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}

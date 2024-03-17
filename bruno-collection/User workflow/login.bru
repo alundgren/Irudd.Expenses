@@ -1,0 +1,27 @@
+meta {
+  name: login
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/v1/identity/login?useCookies=false&useSessionCookies=false
+  body: json
+  auth: none
+}
+
+query {
+  useCookies: false
+  useSessionCookies: false
+}
+
+body:json {
+  {
+    "email": "{{sampleEmail}}",
+    "password": "{{samplePassword}}"
+  }
+}
+
+vars:post-response {
+  accessToken: res.body.accessToken
+}

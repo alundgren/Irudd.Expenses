@@ -1,0 +1,15 @@
+meta {
+  name: categories-all
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{host}}/v1/categories/all
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}

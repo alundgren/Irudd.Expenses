@@ -1,0 +1,23 @@
+meta {
+  name: update-expense
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{host}}/v1/expenses/update
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}
+
+body:json {
+  {
+    "expenseId": "310ee108-55ec-446e-83ab-2eaffc27c33e",
+    "amount": 400,
+    "categoryCode": "other"
+  }
+}

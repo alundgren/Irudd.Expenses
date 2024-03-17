@@ -1,0 +1,24 @@
+meta {
+  name: add-expense
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{host}}/v1/expenses/add
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{accessToken}}
+}
+
+body:json {
+  {
+    "amount": 200,
+    "date": "2024-03-16T12:35:00.0+10:00",
+    "description": "Some other expense åäö",
+    "categoryCode": "other"
+  }
+}

@@ -1,0 +1,18 @@
+meta {
+  name: register
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/v1/identity/register
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "{{sampleEmail}}",
+    "password": "{{samplePassword}}"
+  }
+}
