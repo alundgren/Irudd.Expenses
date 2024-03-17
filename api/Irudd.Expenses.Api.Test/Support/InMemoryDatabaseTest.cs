@@ -7,6 +7,7 @@ internal abstract class InMemoryDatabaseTest
 {
     protected ExpensesContext context;
     protected const string ValidCategoryCode = "food";
+    protected const string OtherValidCategoryCode = "entertainment";
     protected const string InvalidCategoryCode = "d2j8rfj34ru34890";
     private DateTimeOffset baseDate = new DateTimeOffset(2024, 3, 17, 12, 0, 0, TimeSpan.Zero);
     private int dateIncrement = 0;
