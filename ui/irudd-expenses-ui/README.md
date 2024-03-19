@@ -7,6 +7,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Specifically:
 > ng new irudd-expenses-ui --inline-style=false --inline-template=false --routing=true --skip-git=true --style=scss
 
+## Environment settings
+
+- apiBaseUrl: Base url of the backend api (Example: https://localhost:7241 for local development or something like https://api.expenses@example.org in production.)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
