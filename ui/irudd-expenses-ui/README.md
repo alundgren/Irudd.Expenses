@@ -1,4 +1,6 @@
-# IruddExpensesUi
+# Irudd Expenses
+
+- Testing out a by feature folder structure to see how that plays out vs the normal by type structure.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
 
