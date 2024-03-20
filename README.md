@@ -62,3 +62,7 @@ Undo last:
 
 Revert to specific when applied to db:
 > dotnet ef database update <target after>
+
+## TODO
+
+- Try out https://github.com/jbogard/MediatR
