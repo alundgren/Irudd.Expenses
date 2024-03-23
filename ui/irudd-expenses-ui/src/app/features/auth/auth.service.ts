@@ -1,17 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
-  constructor(private router: Router) { }
 
-  isAuthenticated() {
-    return false;
-  }
+    //TODO: ExpirationDate, refreshToken: string
+    private readonly auth  = signal<{ isAuthenticated: boolean, accessToken ?: string }>({ isAuthenticated: false });
 
-  loginUrl() {
-    return this.router.createUrlTree(['/login']);
-  }
+    isAuthenticated() {
+        return this.auth().isAuthenticated;
+    }
+
+    accessToken() {
+        return this.auth().accessToken;
+    }
+
+    loginUrl() {
+        return inject(Router).createUrlTree(['/login']);
+    }
 }

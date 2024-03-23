@@ -1,0 +1,16 @@
+<div class="bg-gray-100 flex flex-col items-start items-center h-dvh gap-5">
+    <nav class="bg-gray-800 p-4 w-screen">
+        <div class="container mx-auto flex justify-between items-center clearfix">
+            <a href="#" class="text-white text-lg font-bold">Logo</a>
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Logout
+            </button>
+        </div>
+    </nav>
+    <div class="mx-auto flex justify-center items-center h-10 w-2/4 rounded bg-gray-400" *ngIf="message()">
+        <p>{{message()?.text}}</p>
+    </div>
+    <div class="container mx-auto flex justify-center items-center grow">
+        <ng-content></ng-content>
+    </div>
+</div>
