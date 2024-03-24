@@ -3,6 +3,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ApiService, getApiUrl } from '../../common/api.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -12,7 +14,7 @@ import { lastValueFrom } from 'rxjs';
     styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-    constructor(private apiService: ApiService) {
+    constructor(private authService: AuthService, private router: Router) {
 
     }
     loginForm = new FormGroup({
@@ -22,16 +24,10 @@ export class LoginComponent {
 
     login(evt ?: Event) {
         evt?.preventDefault();
-        let request = {
-            email: this.loginForm.value.email,
-            password: this.loginForm.value.password
-        };
-        this.apiService.postWithoutAccessToken<{
-            tokenType: string,
-            accessToken: string,
-            expiresIn: number,
-            refreshToken: string }>('v1/identity/login', request).subscribe(({accessToken}) => {
-                console.log(accessToken);
-            });
+        this.authService.login(this.loginForm.value.email ?? '', this.loginForm.value.password ?? '', false).subscribe(wasLoggedIn => {
+            if(wasLoggedIn) {
+                this.router.navigate(['secure/overview']);
+            }
+        });
     }
 }

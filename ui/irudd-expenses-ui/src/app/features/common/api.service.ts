@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
 import { environment } from "../../../environments/environment.development";
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { MessageService } from './message.service';
-import { EMPTY, Observable, catchError, from, of } from 'rxjs';
+import { EMPTY, Observable, catchError, from, of, throwError } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -12,13 +12,30 @@ export class ApiService {
 
     }
 
-    postWithoutAccessToken<T>(relativeUrl: string, data: any) {
-        return this.httpClient.post<T>(getApiUrl(relativeUrl), data)
-        .pipe(
-            catchError((x : HttpErrorResponse) => {
-                this.messageService.showMessage(x.message, 5000);
-                return EMPTY;
-            }));
+    post<TResponse>(relativeUrl: string, data: any, options ?: {
+        accessToken ?: string,
+        handleError ?: (err: HttpErrorResponse) => Observable<TResponse>
+    }) {
+        const headers  = new HttpHeaders();
+        if(options?.accessToken) {
+            headers.set('Authorization', `Bearer ${options?.accessToken}`);
+        }
+        return this
+            .httpClient
+            .post<TResponse>(getApiUrl(relativeUrl), data, { headers: headers })
+            .pipe(
+                catchError((x : HttpErrorResponse) => {
+                    if(options?.handleError) {
+                        return options.handleError(x);
+                    } else {
+                        return throwError(() => x);
+                    }
+                }),
+                catchError((x : HttpErrorResponse) => {
+                    this.messageService.showMessage(x.message, 5000);
+                    return EMPTY;
+                })
+            );
     }
 }
 

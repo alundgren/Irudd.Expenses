@@ -33,10 +33,19 @@ services.AddScoped<ICurrentUser, HttpContextCurrentUser>();
 services.AddScoped<DatabaseSetupService>();
 services.AddScoped<ExpensesService>();
 services.AddScoped<CategoriesService>();
+services.AddCors(options =>
+{
+    var uiBaseUrl = new Uri(builder.Configuration.GetRequiredSettingValue("Irudd.Expenses:UiBaseUrl"));
+    options.AddPolicy(name: "CorsPolicy1",
+        policy =>
+        {
+            policy.WithOrigins(uiBaseUrl.ToString(), uiBaseUrl.ToString().TrimEnd('/'));
+            policy.AllowAnyHeader();
+            policy.AllowAnyMethod();
+        });
+});
 
 var app = builder.Build();
-
-app.MapGroup($"{BaseController.ApiVersion}/identity").MapIdentityApi<User>();
 
 if (app.Environment.IsDevelopment())
 {
@@ -44,7 +53,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+//Middleware order: https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-8.0#middleware-order
 app.UseHttpsRedirection();
+app.UseCors("CorsPolicy1");
+app.MapGroup($"{BaseController.ApiVersion}/identity").MapIdentityApi<User>();
 app.MapControllers();
 
 using (var serviceScope = app.Services.CreateScope())
